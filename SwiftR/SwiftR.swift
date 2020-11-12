@@ -235,14 +235,14 @@ open class SignalR: NSObject, SwiftRWebDelegate {
             #if !os(iOS)
             //config.preferences.setValue(true, forKey: "developerExtrasEnabled")
             #endif
-            wkWebView = WKWebView(frame: CGRect.zero, configuration: config)
-            wkWebView.navigationDelegate = self
+            self.wkWebView = WKWebView(frame: CGRect.zero, configuration: config)
+            self.wkWebView.navigationDelegate = self
 
             let html = "<!doctype html><html><head></head><body>"
                 + "\(jqueryInclude)\(signalRInclude)\(jsInclude)"
                 + "</body></html>"
 
-            wkWebView.loadHTMLString(html, baseURL: baseHTMLUrl)
+            self.wkWebView.loadHTMLString(html, baseURL: baseHTMLUrl)
         }
         
         if let ua = customUserAgent {
