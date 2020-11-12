@@ -228,21 +228,22 @@ open class SignalR: NSObject, SwiftRWebDelegate {
             jsInclude = scriptAsContent(jsURL)
         }
         #endif
-        
-        let config = WKWebViewConfiguration()
-        config.userContentController.add(self, name: "interOp")
-        #if !os(iOS)
-        //config.preferences.setValue(true, forKey: "developerExtrasEnabled")
-        #endif
-        wkWebView = WKWebView(frame: CGRect.zero, configuration: config)
-        wkWebView.navigationDelegate = self
-        
-        let html = "<!doctype html><html><head></head><body>"
-            + "\(jqueryInclude)\(signalRInclude)\(jsInclude)"
-            + "</body></html>"
-        
-        wkWebView.loadHTMLString(html, baseURL: baseHTMLUrl)
-        
+
+        DispatchQueue.main.async {
+            let config = WKWebViewConfiguration()
+            config.userContentController.add(self, name: "interOp")
+            #if !os(iOS)
+            //config.preferences.setValue(true, forKey: "developerExtrasEnabled")
+            #endif
+            wkWebView = WKWebView(frame: CGRect.zero, configuration: config)
+            wkWebView.navigationDelegate = self
+
+            let html = "<!doctype html><html><head></head><body>"
+                + "\(jqueryInclude)\(signalRInclude)\(jsInclude)"
+                + "</body></html>"
+
+            wkWebView.loadHTMLString(html, baseURL: baseHTMLUrl)
+        }
         
         if let ua = customUserAgent {
             applyUserAgent(ua)
