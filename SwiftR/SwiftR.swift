@@ -243,10 +243,10 @@ open class SignalR: NSObject, SwiftRWebDelegate {
                 + "</body></html>"
 
             self.wkWebView.loadHTMLString(html, baseURL: baseHTMLUrl)
-        }
 
-        if let ua = customUserAgent {
-            applyUserAgent(ua)
+            if let ua = customUserAgent {
+                applyUserAgent(ua)
+            }
         }
 
         SwiftR.connections.append(self)
